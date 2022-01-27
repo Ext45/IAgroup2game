@@ -9,3 +9,7 @@ func _physics_process(delta):
 
 func _on_Bullet_area_entered(area):
 	pass # Replace with function body.
+
+
+func _on_VisibilityNotifier2D_viewport_exited(viewport):
+	queue_free()
