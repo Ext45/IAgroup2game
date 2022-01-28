@@ -25,3 +25,9 @@ func _set_asteroid_trajectory(asteroid):
 
 func _on_SpawnTimer_timeout():
 	_spawn_asteroid()
+
+
+func restart():
+	$SpawnTimer.stop()
+	
+	$SpawnTimer.start()

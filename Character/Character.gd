@@ -9,6 +9,13 @@ onready var muzzle = $Muzzle
 
 export (int) var SPEED = 500
 
+func _ready():
+	var camera = get_parent().get_node("MainCamera")
+	self.connect("laser_shoot", camera, "_on_Character_laser_shoot")
+	
+	var game = get_parent()
+	self.connect("player_died", game, "_on_Character_player_died")
+
 func _physics_process(delta: float) -> void:
 	var velocity = Vector2()
 	
@@ -22,9 +29,10 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("shoot"):
 		shoot_laser()
+		
 
 func shoot_laser():
-	emit_signal("spawn_laser", muzzle.global_position)
+	emit_signal("laser_shoot", muzzle.global_position)
 
 
 func _on_Hitbox_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
