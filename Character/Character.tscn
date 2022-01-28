@@ -6,6 +6,7 @@
 [ext_resource path="res://Common/Wraparound.tscn" type="PackedScene" id=4]
 
 [node name="Character" type="KinematicBody2D"]
+scale = Vector2( 0.4, 0.4 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -20,3 +21,10 @@ polygon = PoolVector2Array( -65, 28, -52, 41, -38, 41, -13, 53, 36, 51, 50, 30, 
 
 [node name="Wraparound" parent="." instance=ExtResource( 4 )]
 script = ExtResource( 3 )
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox"]
+polygon = PoolVector2Array( -65, 28, -52, 41, -38, 41, -13, 53, 36, 51, 50, 30, 52, 19, 62, 3, 62, -15, 52, -22, 44, -25, 50, -40, 43, -50, 21, -54, -2, -46, -4, -43, -19, -48, -37, -45, -53, -33, -62, -15, -64, -5, -55, -1, -55, 3, -64, 19 )
+
+[connection signal="body_shape_entered" from="Hitbox" to="." method="_on_Hitbox_body_shape_entered"]

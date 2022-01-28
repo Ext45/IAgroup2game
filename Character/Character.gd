@@ -10,22 +10,7 @@ export (float) var friction = 0.05
 
 func _physics_process(delta: float) -> void:
 	var velocity = Vector2()
-#	input_vector.y = -Input.get_action_strength("move_up") + Input.get_action_strength("move_down")
-#	input_vector.x = Input.get_action_strength("right") - Input.get_action_strength("left")
-#
-#	velocity += Vector2(input_vector.x * acceleration, input_vector.y * acceleration)
-#	velocity.x = clamp(velocity.x, -max_speed, max_speed)
-#	velocity.y = clamp(velocity.y, -max_speed, max_speed)
-#
-#	if input_vector.y == 0 && velocity != Vector2.ZERO:
-#		velocity = lerp(velocity, Vector2.ZERO, friction)
-#	if input_vector.y == 0 && velocity != Vector2.ZERO:
-#		velocity = lerp(velocity, Vector2.ZERO, friction)
 	
-	if (Input.is_action_pressed("left")):
-		velocity.x -= SPEED
-	if (Input.is_action_pressed("right")):
-		velocity.x += SPEED
 	if (Input.is_action_pressed("up")):
 		velocity.y -= SPEED
 	if (Input.is_action_pressed("down")):
@@ -39,3 +24,8 @@ func _physics_process(delta: float) -> void:
 
 func shoot_laser():
 	emit_signal("spawn_laser", muzzle.global_position)
+
+
+func _on_Hitbox_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+	if (!self.is_queued_for_deletion() && body.is_in_group("Asteroids")):
+		queue_free()
