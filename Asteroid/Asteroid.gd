@@ -5,10 +5,21 @@ var rng = RandomNumberGenerator.new()
 
 var is_exploded = false
 
+signal score_changed
+var score_value = 50
+
+
+func _ready() -> void:
+	var label = get_tree().get_root().get_node("World/GUI/MarginContainer/HBoxContainer/Score")
+	self.connect("score_changed", label, "update_score")
+
 func explode():
 	if is_exploded:
 		return
 	is_exploded = true
+	
+	
+	emit_signal("score_changed", score_value)
 	
 	_spawn_asteroid_debris(4)
 	
