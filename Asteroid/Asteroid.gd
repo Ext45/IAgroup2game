@@ -3,6 +3,7 @@ extends RigidBody2D
 var asteroid_small_scene = load("res://Asteroid/AsteroidSmall.tscn")
 var rng = RandomNumberGenerator.new()
 
+var explosion_particles_scene = load("res://Objects/ParticlesAsteroidExplosion.tscn")
 var is_exploded = false
 
 signal score_changed
@@ -18,13 +19,19 @@ func explode():
 		return
 	is_exploded = true
 	
-	
+	_explosion_particles()
 	emit_signal("score_changed", score_value)
 	
 	_spawn_asteroid_debris(4)
 	
 	get_parent().remove_child(self)
 	queue_free()
+
+func _explosion_particles():
+	var explosion_particles = explosion_particles_scene.instance()
+	explosion_particles.position = self.position
+	get_parent().add_child(explosion_particles)
+	explosion_particles.emitting = true
 
 func _spawn_asteroid_debris(num: int):
 	for i in range(num):
