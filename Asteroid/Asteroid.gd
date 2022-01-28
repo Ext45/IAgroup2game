@@ -6,11 +6,14 @@ var rng = RandomNumberGenerator.new()
 var explosion_particles_scene = load("res://Objects/ParticlesAsteroidExplosion.tscn")
 var is_exploded = false
 
+signal explode
 signal score_changed
 var score_value = 50
 
 
 func _ready() -> void:
+	var main_camera = get_node("/root/World/MainCamera")
+	self.connect("explode", main_camera, "asteroid_exploded")
 	var label = get_tree().get_root().get_node("World/GUI/MarginContainer/HBoxContainer/Score")
 	self.connect("score_changed", label, "update_score")
 
@@ -22,6 +25,7 @@ func explode():
 	_explosion_particles()
 	emit_signal("score_changed", score_value)
 	
+	emit_signal("explode")
 	_spawn_asteroid_debris(4)
 	
 	get_parent().remove_child(self)

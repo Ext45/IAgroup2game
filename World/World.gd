@@ -1,7 +1,7 @@
 extends Node2D
 
 var player_scene = load("res://Character/Character.tscn")
-var Laser = preload("res://Bullet/Bullet.tscn")
+var Laser = preload("res://Objects/Laser.tscn")
 var is_game_over = false
 
 
