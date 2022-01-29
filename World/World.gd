@@ -13,13 +13,9 @@ func _on_Character_laser_shoot(location):
 
 # Game Over
 func _on_Character_player_died():
-	print("player deaded!")
 	# Stop game music, load game over music
-	# Stop asteroids from spawning
 	
-	for a in get_tree().get_nodes_in_group("Asteroids"):
-		pass
-		
+	$LevelTimer.stop()
 	$GameOverTimer.start()
 
 
@@ -34,11 +30,15 @@ func _unhandled_input(event: InputEvent):
 		_restart_game()
 		
 func _restart_game():
+	for a in get_tree().get_nodes_in_group("Asteroids"):
+		a.queue_free()
 	is_game_over = false
 	_undo_game_over()
 	_respawn_player()
 	$AsteroidSpawner.restart()
+	$LevelTimer.start()
 	$GUI/MarginContainer/HBoxContainer/Score.reset()
+	$GUI/MarginContainer/HBoxContainer/Time.reset()
 	
 	
 func _undo_game_over():
