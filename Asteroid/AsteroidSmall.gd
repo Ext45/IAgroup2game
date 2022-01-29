@@ -10,8 +10,17 @@ func explode():
 	is_exploded = true
 	
 	_explosion_particles()
+	_play_explosion_sound()
 	emit_signal("explode")
 	emit_signal("score_changed", 50)
 	
 	get_parent().remove_child(self)
 	queue_free()
+
+func _play_explosion_sound():
+	var explosion_sound = AudioStreamPlayer2D.new()
+	explosion_sound.stream = load("res://Sounds/Explosion2.wav")
+	explosion_sound.pitch_scale = rand_range(0.8, 1)
+	explosion_sound.position = self.position
+	get_parent().add_child(explosion_sound)
+	explosion_sound.play(0)

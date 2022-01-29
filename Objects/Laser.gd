@@ -3,6 +3,9 @@ extends Area2D
 
 var speed = 1000
 
+func _ready():
+	$AudioStreamPlayer2D.pitch_scale = rand_range(0.8, 1)
+
 func _process(delta):
 	global_position.x += speed*delta
 

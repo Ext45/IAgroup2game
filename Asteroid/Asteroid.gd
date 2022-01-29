@@ -23,6 +23,8 @@ func explode():
 	is_exploded = true
 	
 	_explosion_particles()
+	_play_explosion_sound()
+	
 	emit_signal("score_changed", score_value)
 	
 	emit_signal("explode")
@@ -36,6 +38,14 @@ func _explosion_particles():
 	explosion_particles.position = self.position
 	get_parent().add_child(explosion_particles)
 	explosion_particles.emitting = true
+
+func _play_explosion_sound():
+	var explosion_sound = AudioStreamPlayer2D.new()
+	explosion_sound.stream = load("res://Sounds/Explosion1.wav")
+	explosion_sound.pitch_scale = rand_range(0.7, 0.9)
+	explosion_sound.position = self.position
+	get_parent().add_child(explosion_sound)
+	explosion_sound.play(0)
 
 func _spawn_asteroid_debris(num: int):
 	for i in range(num):
