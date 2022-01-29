@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Space Battle.mp3-9680c4f0baf848c13867704f0fab7a7b.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Space Battle.mp3"
+dest_files=[ "res://.import/Space Battle.mp3-9680c4f0baf848c13867704f0fab7a7b.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
