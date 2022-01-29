@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Character/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World/World.gd" type="Script" id=2]
@@ -9,12 +9,13 @@
 [ext_resource path="res://entities/MainCamera.tscn" type="PackedScene" id=7]
 [ext_resource path="res://World/Backgroud.png" type="Texture" id=8]
 [ext_resource path="res://Sounds/Space Battle.mp3" type="AudioStream" id=9]
+[ext_resource path="res://World/Time.gd" type="Script" id=10]
 
 [sub_resource type="Shader" id=4]
 code = "shader_type canvas_item;
 
-uniform vec2 direction = vec2(1.0,0.0);
-uniform float speed_scale = 0.25;
+uniform vec2 direction = vec2(0.5,0.0);
+uniform float speed_scale = 0.1;
 
 void fragment(){
 
@@ -98,7 +99,6 @@ anims/Spaceship = SubResource( 7 )
 [node name="AsteroidSpawner" parent="." instance=ExtResource( 3 )]
 
 [node name="LevelTimer" type="Timer" parent="."]
-wait_time = 60.0
 autostart = true
 
 [node name="GUI" type="Control" parent="."]
@@ -132,7 +132,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 5
 custom_fonts/font = SubResource( 1 )
 text = "60"
-script = ExtResource( 4 )
+script = ExtResource( 10 )
 
 [node name="Score" type="Label" parent="GUI/MarginContainer/HBoxContainer"]
 margin_left = 622.0
@@ -187,8 +187,10 @@ script = ExtResource( 6 )
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
+volume_db = -6.118
 autoplay = true
 
 [connection signal="laser_shoot" from="Character" to="MainCamera" method="_on_Character_laser_shoot"]
 [connection signal="player_died" from="Character" to="." method="_on_Character_player_died"]
+[connection signal="timeout" from="LevelTimer" to="GUI/MarginContainer/HBoxContainer/Time" method="_on_LevelTimer_timeout"]
 [connection signal="timeout" from="GameOverTimer" to="." method="_on_GameOverTimer_timeout"]

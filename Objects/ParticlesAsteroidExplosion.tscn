@@ -1,4 +1,16 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 0.0548364, 0.0502625, 0.119141, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.153409 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
 
 [sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 1
@@ -11,14 +23,16 @@ initial_velocity_random = 0.27
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 linear_accel = -50.0
-scale = 5.0
-scale_random = 0.5
+scale = 10.0
+scale_random = 1.0
+scale_curve = SubResource( 5 )
+color_ramp = SubResource( 3 )
 
 [node name="ParticlesAsteroidExplosion" type="Particles2D"]
 emitting = false
 amount = 40
 lifetime = 0.5
 one_shot = true
-explosiveness = 0.7
+explosiveness = 1.0
 randomness = 1.0
 process_material = SubResource( 1 )
