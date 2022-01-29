@@ -6,6 +6,9 @@ var rng = RandomNumberGenerator.new()
 var explosion_particles_scene = load("res://Objects/ParticlesAsteroidExplosion.tscn")
 var is_exploded = false
 
+var asteroid_s_1 = preload("res://Asteroid/Asteroid_S.png")
+var asteroid_s_2 = preload("res://Asteroid/Asteroid_S.png")
+
 signal explode
 signal score_changed
 var score_value = 50
@@ -38,6 +41,7 @@ func _explosion_particles():
 	explosion_particles.position = self.position
 	get_parent().add_child(explosion_particles)
 	explosion_particles.emitting = true
+	explosion_particles.get_node("ParticlesSoundWave").emitting = true
 
 func _play_explosion_sound():
 	var explosion_sound = AudioStreamPlayer2D.new()
@@ -54,16 +58,26 @@ func _spawn_asteroid_debris(num: int):
 func _spawn_asteroid_small():
 	var asteroid_small = asteroid_small_scene.instance()
 	asteroid_small.position = self.position
+	_pick_random_sprite(asteroid_small)
 	_randomize_trajectory(asteroid_small)
 	get_parent().add_child(asteroid_small)
 
+func _pick_random_sprite(asteroid_small):
+	var img
+	var num = rand_range(0,2)
+	if num < 1:
+		img = asteroid_s_1
+	elif num >= 1:
+		img = asteroid_s_2
+	asteroid_small.get_node("Sprite").set_texture(img)
+
 func _randomize_trajectory(asteroid):
 	# random spin
-	asteroid.angular_velocity = rand_range(-4, 4)
+	asteroid.angular_velocity = rand_range(-1, 1)
 	asteroid.angular_damp = 0
 	
 	rng.randomize()
-	var lv_x = rng.randi_range(-1, 1)*400
+	var lv_x = rng.randf_range(-1, 1)*400
 	var lv_y = rng.randi_range(-1, 1)*400
 	
 	asteroid.linear_velocity = Vector2(lv_x, lv_y)

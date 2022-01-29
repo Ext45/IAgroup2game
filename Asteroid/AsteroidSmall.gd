@@ -17,6 +17,12 @@ func explode():
 	get_parent().remove_child(self)
 	queue_free()
 
+func _explosion_particles():
+	var explosion_particles = explosion_particles_scene.instance()
+	explosion_particles.position = self.position
+	get_parent().add_child(explosion_particles)
+	explosion_particles.emitting = true
+
 func _play_explosion_sound():
 	var explosion_sound = AudioStreamPlayer2D.new()
 	explosion_sound.stream = load("res://Sounds/Explosion1.wav")

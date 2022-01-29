@@ -1,7 +1,8 @@
 extends Node
 
 var asteroid_scene = load("res://Asteroid/Asteroid.tscn")
-
+var asteroid_1 = preload("res://Asteroid/Asteroid_S.png")
+var asteroid_2 = preload("res://Asteroid/Asteroid_S.png")
 
 func _ready() -> void:
 	_spawn_asteroid()
@@ -9,9 +10,19 @@ func _ready() -> void:
 func _spawn_asteroid():
 	var asteroid = asteroid_scene.instance()
 	
+	_pick_random_sprite(asteroid)
 	_set_asteroid_position(asteroid)
 	_set_asteroid_trajectory(asteroid)
 	add_child(asteroid)
+
+func _pick_random_sprite(asteroid):
+	var img
+	var num = rand_range(0,2)
+	if num < 1:
+		img = asteroid_1
+	elif num >= 1:
+		img = asteroid_2
+	asteroid.get_node("Sprite").set_texture(img)
 
 func _set_asteroid_position(asteroid):
 	var rect = get_viewport().size

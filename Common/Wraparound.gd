@@ -24,7 +24,7 @@ func _ready():
 
 # Check whether the parent object is NOT in the wrap area,
 # call the wrap function if it isn't
-func _process(delta):
+func _process(_delta):
 	if !wrapArea.has_point(get_parent().global_position):
 		wrap()
 
