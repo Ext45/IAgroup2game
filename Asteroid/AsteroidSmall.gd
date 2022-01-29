@@ -19,7 +19,7 @@ func explode():
 
 func _play_explosion_sound():
 	var explosion_sound = AudioStreamPlayer2D.new()
-	explosion_sound.stream = load("res://Sounds/Explosion2.wav")
+	explosion_sound.stream = load("res://Sounds/NewExplosion2.wav")
 	explosion_sound.pitch_scale = rand_range(0.8, 1)
 	explosion_sound.position = self.position
 	get_parent().add_child(explosion_sound)
