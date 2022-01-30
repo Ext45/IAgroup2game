@@ -12,7 +12,7 @@ func explode():
 	_explosion_particles()
 	_play_explosion_sound()
 	emit_signal("explode")
-	emit_signal("score_changed", 50)
+	emit_signal("score_changed", 75)
 	
 	get_parent().remove_child(self)
 	queue_free()
