@@ -38,6 +38,12 @@ func _physics_process(delta: float) -> void:
 			velocity.y -= SPEED
 		if (Input.is_action_pressed("down")):
 			velocity.y += SPEED
+		if (Input.is_action_pressed("right")):
+			if self.position.x < get_viewport().size.x - 40:
+				velocity.x += SPEED
+		if (Input.is_action_pressed("left")):
+			if self.position.x > 40:
+				velocity.x -= SPEED
 	
 	if Input.is_action_just_pressed("dash"):
 		if canDash and velocity.y != 0:

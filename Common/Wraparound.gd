@@ -4,7 +4,7 @@ extends Node
 export (Rect2) var wrapArea = null
 
 # Expose two flags to determine which axes shall be wrapped; both defaulted true
-export (bool) var horizontalWrapping = true
+export (bool) var horizontalWrapping = false
 export (bool) var verticalWrapping = true
 
 # Dictionary of axis directions
