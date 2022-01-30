@@ -14,6 +14,7 @@ var isDashing = false
 var dash_time = DASH_DISTANCE/DASH
 var dash_timer = dash_time
 
+var dashSpeed = 1
 export (int) var SPEED = 500
 
 func _ready():
@@ -29,31 +30,32 @@ func _physics_process(delta: float) -> void:
 	if isDashing:
 		dash_timer += delta
 	if dash_timer > dash_time:
+		dashSpeed = 1
 		isDashing = false
 	else:
 		isDashing = true
 	
 	if not isDashing:
 		if (Input.is_action_pressed("up")):
-			velocity.y -= SPEED
+			velocity.y -= 1
 		if (Input.is_action_pressed("down")):
-			velocity.y += SPEED
+			velocity.y += 1
 		if (Input.is_action_pressed("right")):
 			if self.position.x < get_viewport().size.x - 40:
-				velocity.x += SPEED
+				velocity.x += 1
 		if (Input.is_action_pressed("left")):
 			if self.position.x > 40:
-				velocity.x -= SPEED
+				velocity.x -= 1
 	
 	if Input.is_action_just_pressed("dash"):
 		if canDash and velocity.y != 0:
 			$DashTimer.start()
 			$SoundPlayer2D.play()
-			velocity.y *= DASH
+			dashSpeed = DASH
 			canDash = false
 			isDashing = true
 	
-	move_and_collide(velocity * delta)
+	move_and_collide(velocity.normalized() * delta * SPEED)
 
 
 func _unhandled_key_input(event: InputEventKey) -> void:
