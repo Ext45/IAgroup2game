@@ -47,6 +47,10 @@ func _physics_process(delta: float) -> void:
 			canDash = false
 			isDashing = true
 	
+	if (Input.is_action_just_pressed("shoot_controller")):
+		$LaserWeapon.shoot()
+		emit_signal("laser_shoot")
+	
 	move_and_collide(velocity * delta)
 
 
@@ -54,6 +58,8 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 	if (event.is_action_pressed("shoot")):
 		$LaserWeapon.shoot()
 		emit_signal("laser_shoot")
+		
+
 
 func _on_Hitbox_body_shape_entered(_body_rid, body, _body_shape_index, _local_shape_index):
 	if (!self.is_queued_for_deletion() && body.is_in_group("Asteroids")):
