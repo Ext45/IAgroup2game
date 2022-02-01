@@ -10,7 +10,7 @@ func _process(delta):
 	global_position.x += speed*delta
 
 
-func _on_VisibilityNotifier2D_viewport_exited():
+func _on_VisibilityNotifier2D_viewport_exited(_stoperror):
 	queue_free()
 
 
