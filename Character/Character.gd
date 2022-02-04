@@ -14,7 +14,6 @@ var isDashing = false
 var dash_time = DASH_DISTANCE/DASH
 var dash_timer = dash_time
 
-var dashSpeed = 1
 export (int) var SPEED = 500
 
 func _ready():
@@ -30,7 +29,6 @@ func _physics_process(delta: float) -> void:
 	if isDashing:
 		dash_timer += delta
 	if dash_timer > dash_time:
-		dashSpeed = 1
 		isDashing = false
 	else:
 		isDashing = true
@@ -51,15 +49,15 @@ func _physics_process(delta: float) -> void:
 		if canDash and velocity.y != 0:
 			$DashTimer.start()
 			$SoundPlayer2D.play()
-			dashSpeed = DASH
+			velocity.y *= DASH
 			canDash = false
 			isDashing = true
-
+	
 	if (Input.is_action_just_pressed("shoot_controller")):
 		$LaserWeapon.shoot()
 		emit_signal("laser_shoot")
 	
-	move_and_collide(velocity * delta * SPEED)
+	move_and_collide(velocity * delta)
 
 
 func _unhandled_key_input(event: InputEventKey) -> void:
