@@ -31,7 +31,8 @@ func _unhandled_input(event: InputEvent):
 	if (is_game_over and event.is_action_released("restart_game")):
 		_restart_game()
 	if (is_level_ended and event.is_action_released("next_level")):
-		print("Let's a-go!")
+		$AsteroidSpawner.on_level_ended()
+		_new_game()
 		
 func _restart_game():
 	for a in get_tree().get_nodes_in_group("Asteroids"):
@@ -39,6 +40,17 @@ func _restart_game():
 	is_game_over = false
 	_undo_game_over()
 	_respawn_player()
+	$AsteroidSpawner.restart()
+	$LevelTimer.start()
+	$GUI/MarginContainer/HBoxContainer/Score.reset()
+	$GUI/MarginContainer/HBoxContainer/Time.reset()
+
+func _new_game():
+	for a in get_tree().get_nodes_in_group("Asteroids"):
+		a.queue_free()
+	is_game_over = false
+	_undo_game_over()
+	$Character.position = Vector2(50, 350)
 	$AsteroidSpawner.restart()
 	$LevelTimer.start()
 	$GUI/MarginContainer/HBoxContainer/Score.reset()

@@ -1,7 +1,6 @@
 extends Node
 
 var asteroid_scene = load("res://Asteroid/Asteroid.tscn")
-var person_scene = load("res://Person/Person.tscn")
 var asteroid_1 = preload("res://Asteroid/Asteroid_S.png")
 var asteroid_2 = preload("res://Asteroid/Asteroid_S.png")
 var _timer = null
@@ -51,9 +50,12 @@ func _set_asteroid_trajectory(asteroid):
 func _on_SpawnTimer_timeout():
 	_spawn_asteroid()
 
-
 func restart():
 	$SpawnTimer.stop()
 	_timer.stop()
 	$SpawnTimer.start()
 	_timer.start()
+
+func on_level_ended():
+	$SpawnTimer.set_wait_time($SpawnTimer.wait_time / 1.2)
+	print($SpawnTimer.wait_time)
