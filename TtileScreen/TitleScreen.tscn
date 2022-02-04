@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://TtileScreen/TitleScreen.gd" type="Script" id=1]
 [ext_resource path="res://World/Backgroud.png" type="Texture" id=2]
@@ -28,6 +28,9 @@ font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=6]
 size = 48
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=13]
 font_data = ExtResource( 3 )
 
 [node name="Control" type="Control"]
@@ -91,16 +94,32 @@ size_flags_vertical = 3
 custom_fonts/font = SubResource( 12 )
 text = "Quit"
 
-[node name="Time" type="Label" parent="."]
-margin_left = 347.0
-margin_top = 159.0
-margin_right = 959.0
-margin_bottom = 199.0
+[node name="Ttile" type="Label" parent="."]
+margin_left = 273.0
+margin_top = 172.0
+margin_right = 1021.0
+margin_bottom = 244.0
 size_flags_horizontal = 3
 size_flags_vertical = 5
 custom_colors/font_color = Color( 0.8, 0.8, 0.8, 1 )
 custom_fonts/font = SubResource( 6 )
 text = "Astro Explorers"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ttile2" type="Label" parent="."]
+margin_left = 10.0
+margin_top = 694.0
+margin_right = 530.0
+margin_bottom = 729.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+custom_colors/font_color = Color( 0.8, 0.8, 0.8, 1 )
+custom_fonts/font = SubResource( 13 )
+text = "Font is 8 Bit Wonder by Joiro Hatgaya
+ "
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
