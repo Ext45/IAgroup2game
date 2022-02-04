@@ -57,7 +57,7 @@ func _physics_process(delta: float) -> void:
 		$LaserWeapon.shoot()
 		emit_signal("laser_shoot")
 	
-	move_and_collide(velocity * delta)
+	move_and_collide(velocity * delta * SPEED)
 
 
 func _unhandled_key_input(event: InputEventKey) -> void:
