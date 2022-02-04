@@ -222,7 +222,6 @@ one_shot = true
 [node name="MainCamera" parent="." instance=ExtResource( 7 )]
 anchor_mode = 0
 current = true
-zoom = Vector2( 1.26, 1.215 )
 script = ExtResource( 6 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
