@@ -110,5 +110,15 @@ polygon = PoolVector2Array( -52.5, -110, -52.5, -100, 45, -100, 45, -110 )
 
 [node name="Tween" type="Tween" parent="DashBar"]
 
+[node name="Label" type="Label" parent="."]
+margin_left = -20.0
+margin_top = -127.5
+margin_right = 45.0
+margin_bottom = -105.5
+text = "Text"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="body_shape_entered" from="Hitbox" to="." method="_on_Hitbox_body_shape_entered"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
